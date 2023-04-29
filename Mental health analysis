@@ -1,3 +1,18 @@
 SELECT * FROM students;
 #This shows all the rows and columns contained in the database 
-SELECT COUNT(*) FROM students;
+SELECT count(*)
+FROM students AS total_records;
+# Each row represents individual students which is about 286
+SELECT *
+FROM students 
+where inter_dom= 'Inter';
+#my interest was on the international students
+SELECT stay, 
+       ROUND(AVG(todep), 2) AS average_phq, 
+       ROUND(AVG(tosc), 2) AS average_scs, 
+       ROUND(AVG(toas), 2) AS average_as
+FROM students
+WHERE inter_dom = 'Inter'
+GROUP BY stay
+ORDER BY stay DESC;
+# to see how the length of stay of an international student impacts the average diagnostic scores rounded to two decimal places. Order the results by descending order of the length of stay
