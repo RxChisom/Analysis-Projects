@@ -1,1 +1,3 @@
+SELECT * FROM students;
+#This shows all the rows and columns contained in the database 
 SELECT COUNT(*) FROM students;
