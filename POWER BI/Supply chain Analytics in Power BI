@@ -7,3 +7,26 @@ Next up is to look at extended cost and full cost for each supplier
 The goal of my visualisation will be to show supplier name with the lowestcost for part number and quote volume combination, the full cost breakdown by 
 extended and full cost, and visibility of all supplier quotes and full cost for the part number.
 
+Now through a scenario, we are using DAX to calculate full cost for wider range of production volumes, using this formula
+scenario full cost = MINX(filter('Supplier (Quotes)','scenario volume'[Value]>='Supplier (Quotes)'[Volume]),'Supplier (Quotes)'[Unit_Cost]*'scenario volume'[Value] + 'Supplier (Quotes)'[Non_recurring_expenses])
+Visualising this data by planning a scenario planner report
+
+Supposing marketing projects the demand for a product to be 48000 units, from the data it will be more rational to order up to 50000 to reduce full cost by 10%
+
+MAKE ANALYSIS
+I created a dax measure called additional capacity to show gap between existing capacity and scenario volume value
+additional unit capacity required = minx('Machine_Model (Internal_Mfg_Resource_Estimates)', max('scenario volume'[scenario volume value]-'Machine_Model (Internal_Mfg_Resource_Estimates)'[Existing_Capacity],0))
+
+Then i created capital investment required measure using this formula
+capital investment required = minx('Machine_Model (Internal_Mfg_Resource_Estimates)',roundup([additional unit capacity required]/min('Machine_Mod(Internal_Mfg_Resource_Estimates)'[Unit_Capacity]),0) * 'Machine_Model (Internal_Mfg_Resource_Estimates)'[Machine_Fixed_Cost])
+Then calculating the make scenario cost 
+using formula= minx('Machine_Model (Internal_Mfg_Resource_Estimates)',[capital investment required]+'Machine_Model (Internal_Mfg_Resource_Estimates)'[Cost_per_Unit] * 'scenario volume'[scenario volume value])
+using the same formula for scenario full cost , we create a measure called buy scenario full cost
+and then finaaly creating measure for cost avoidance using the formula
+cost avoidanceabs([Make scenario full cost]-[buy scenario full cost])
+Make vs buy measure using if function
+Make vs buy = if(ISBLANK([Make scenario full cost]),BLANK(),if([Make scenario full cost]>=[buy scenario full cost],"buy","make"))
+Yield rate for each company was created to compare scenario volume related to the yield rate of each company
+
+Hope you enjoyed my thought process
+Dataset was from Data Camp from practiing their case studies
