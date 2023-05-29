@@ -1,0 +1,9 @@
+The goal of the analysis is to visualize and interpret results based on analysis to determine the make versus buy decision for many products using
+requested quotes from suppliers
+BUY ANALYSIS
+This is to see if we are to buy instead of make
+From the first visualisation, the unit cost decreases with increase in volume , this satisfies the economies of scale
+Next up is to look at extended cost and full cost for each supplier
+The goal of my visualisation will be to show supplier name with the lowestcost for part number and quote volume combination, the full cost breakdown by 
+extended and full cost, and visibility of all supplier quotes and full cost for the part number.
+
