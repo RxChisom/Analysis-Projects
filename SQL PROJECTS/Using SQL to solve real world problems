@@ -1,1 +1,26 @@
+#Query to show a list of top paying active customers  sorted by the amount they paid in descending order
+SELECT first_name, 
+	   last_name, 
+       amount 
+FROM payment AS p
+INNER JOIN customer AS c
+  ON p.customer_id = c.customer_id
+WHERE active = TRUE
+ORDER BY amount DESC;
 
+# Query to run a 50% off promotion for films released prior to 2006.
+SELECT LOWER(title) AS title, 
+  rental_rate AS original_rate, 
+  rental_rate * 0.5 AS sale_rate 
+FROM film
+WHERE release_year < 2006;
+
+# Query to learn more about the differences in payments between the customers who are active and those who are not using aggregate functions
+SELECT active, 
+       COUNT(payment_id) AS num_transactions, 
+       AVG(amount) AS avg_amount, 
+       SUM(amount) AS total_amount
+FROM payment AS p
+INNER JOIN customer AS c
+  ON p.customer_id = c.customer_id
+GROUP BY active;
