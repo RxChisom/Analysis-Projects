@@ -1,5 +1,6 @@
 The goal of the analysis is to visualize and interpret results based on analysis to determine the make versus buy decision for many products using
 requested quotes from suppliers
+
 BUY ANALYSIS
 This is to see if we are to buy instead of make
 From the first visualisation, the unit cost decreases with increase in volume , this satisfies the economies of scale
@@ -29,6 +30,6 @@ Make vs buy = if(ISBLANK([Make scenario full cost]),BLANK(),if([Make scenario fu
 Yield rate for each company was created to compare scenario volume related to the yield rate of each company
 
 Hope you enjoyed my thought process
-Dataset was from Data Camp from practiing their case studies
+Dataset was from Data Camp from practising their case studies
 
 
